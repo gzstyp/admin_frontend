@@ -171,7 +171,7 @@
                             var html = "<a href='javascript:thisPage.rowEdit("+meta.row+");' style='outline:none;text-decoration: none;color:#3b8cff;margin-left:6px;display:none' permission='user:row:edit'>编辑</a>" +
                             "<a href='javascript:thisPage.rowDel("+meta.row+");' style='outline:none;text-decoration: none;color:#f00;margin-left:6px;display:none' permission='user:row:delById'>删除</a>" +
                             "<a class='hidden-xs' href='javascript:thisPage.rowAllotRole("+meta.row+");' style='outline:none;text-decoration: none;color:#00a6ac;margin-left:6px;display:none' permission='user:btn_row:getAllotRole'>角色</a>"+
-                            "<a href='javascript:thisPage.rowDisable("+meta.row+");' style='outline:none;text-decoration: none;color:#33a3dc;margin-left:6px;display:none' permission='user:row:editEnabled'>启用禁用</a>"+
+                            "<a href='javascript:thisPage.rowDisable("+meta.row+");' style='outline:none;text-decoration: none;color:#33a3dc;margin-left:6px;display:none' permission='user:row:editEnabled'>"+(row.enabled === 0 ? "禁用":"启用")+"</a>"+
                             "<a class='hidden-xs' href='javascript:thisPage.rowUserMenu("+meta.row+");' style='outline:none;text-decoration: none;color:#008792;margin-left:6px;display:none' permission='user:row:getOwnMenu'>私有菜单</a>"+
                             "<a href='javascript:thisPage.rowOwnMenu("+meta.row+");' style='outline:none;text-decoration: none;color:#06aff3;margin-left:6px;display:none' permission='user:row:getMenuData'>权限菜单</a>";
                             return html;
@@ -419,6 +419,11 @@
                 },
                 rowDel : function(index){
                     var row = thisJquery.fnGetData(index);
+                    var user_name = row.user_name;
+                    if(user_name == 'admin'){
+                        layerFn.alert('不能操作['+user_name+']账号',AppKey.code.code199);
+                        return;
+                    }
                     layerFn.confirm('['+row.user_name+']删除后是无法恢复,确定要删除吗?',function(){
                         layerFn.delByIdHint(urlDelById,row.kid,function(data){
                             thisPage.complete(data,null,true);
@@ -433,6 +438,11 @@
                 /*启用禁用*/
                 rowDisable : function(index){
                     var row = thisJquery.fnGetData(index);
+                    var user_name = row.user_name;
+                    if(user_name == 'admin'){
+                        layerFn.alert('不能操作['+user_name+']账号',AppKey.code.code199);
+                        return;
+                    }
                     var enabled = row.enabled;
                     var msg = '禁用';
                     var disable = 1;
