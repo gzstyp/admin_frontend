@@ -1277,7 +1277,7 @@
                     cache : false,
                     type: "GET",
                     autoParam : ["kid"],
-                    otherParam: ["access_token",sessionStorage.getItem('access_token'),"refresh_token",sessionStorage.getItem("refresh_token"),"token",function(){return $("#type").val()}],
+                    otherParam: ["accessToken",sessionStorage.getItem('accessToken'),"refreshToken",sessionStorage.getItem("refreshToken"),"token",function(){return $("#type").val()}],
                     dataFilter: function(treeId,parentNode,result){
                         layerFn.closeIndex(self.layerIndex);
                         var bl = layerFn.checkLogin(result);

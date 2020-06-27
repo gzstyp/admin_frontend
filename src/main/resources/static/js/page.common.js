@@ -897,7 +897,7 @@ var refreshFlag = true;
             head[0].appendChild(link);
         },
         getPageHashToken : function(url){
-            window.location.href = url + '?&access_token=' + sessionStorage.getItem('access_token') || '' + '&refresh_token=' + sessionStorage.getItem("refresh_token") || '';
+            window.location.href = url + '?&accessToken=' + sessionStorage.getItem('accessToken') || '' + '&refreshToken=' + sessionStorage.getItem("refreshToken") || '';
         },
         getPageNormal : function(url){
             window.location.href = url;
@@ -910,7 +910,7 @@ var refreshFlag = true;
                 type : "GET",
                 url : urlPrefix + url,
                 data : params,
-                headers : {'access_token': sessionStorage.getItem('access_token') || '',"refresh_token":sessionStorage.getItem('refresh_token') || ''},//好使
+                headers : {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem('refreshToken') || ''},//好使
                 beforeSend : function(request){
                     self.layerIndex = layerFn.loading('正在处理……');
                 },
@@ -1885,12 +1885,12 @@ var refreshFlag = true;
             });
     };
     $.ajaxSetup({
-        //headers: {'access_token': sessionStorage.getItem('access_token') || '',"refresh_token":sessionStorage.getItem("refresh_token") || ''},//这个属性不怎么好使
+        //headers: {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem("refreshToken") || ''},//这个属性不怎么好使
     });
     $.ajaxPrefilter(function(options,originalOptions,jqXHR){
-        // var access_token = sessionStorage.getItem('access_token') || '';//当前面的为null后面的是默认值
-        // var refresh_token = sessionStorage.getItem("refresh_token") || ''; //当前面的为null后面的是默认值
-        // options.data += '&access_token='+access_token+'&refresh_token='+refresh_token;//这个好使,意思是 所有的请求都要加上access_token=52556
+        // var accessToken = sessionStorage.getItem('accessToken') || '';//当前面的为null后面的是默认值
+        // var refreshToken = sessionStorage.getItem("refreshToken") || ''; //当前面的为null后面的是默认值
+        // options.data += '&accessToken='+accessToken+'&refreshToken='+refreshToken;//这个好使,意思是 所有的请求都要加上access_token=52556
         // 所有的post属性都要加上ssid
         /*if(options.method && options.method.toLowerCase() == 'post'){
             var ssid = sessionStorage.getItem('ssid'+window.ourpalmSdk) || '';
@@ -2079,7 +2079,7 @@ var refreshFlag = true;
             type : type,
             url : urlPrefix + url,
             //xhrFields : {withCredentials: true},crossDomain : true,
-            headers : {'access_token': sessionStorage.getItem('access_token') || '',"refresh_token":sessionStorage.getItem("refresh_token") || ''},
+            headers : {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem("refreshToken") || ''},
             dataType : "json",
             data : params,
             beforeSend : function(request){
@@ -2135,7 +2135,7 @@ var refreshFlag = true;
     }
     /*私有更新令牌方法*/
     function renewalToken(){
-        var params = {'access_token': (sessionStorage.getItem('access_token') || '')}
+        var params = {'accessToken': (sessionStorage.getItem('accessToken') || '')}
         $.ajax({
             type : "POST",
             url : urlPrefix + '/user/renewalToken',
@@ -2147,8 +2147,8 @@ var refreshFlag = true;
                 },120000);//2分钟后可以再刷新
                 if(data.code == AppKey.code.code200){
                     var token = data.data;
-                    sessionStorage.setItem("access_token",token.access_token);
-                    sessionStorage.setItem("refresh_token",token.refresh_token);
+                    sessionStorage.setItem("accessToken",token.accessToken);
+                    sessionStorage.setItem("refreshToken",token.refreshToken);
                 }else if(data.code == AppKey.code.code205){
                     layerFn.tokenLogin();return;
                 }else{

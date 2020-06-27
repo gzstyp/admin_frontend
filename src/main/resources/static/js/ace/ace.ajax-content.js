@@ -51,7 +51,7 @@
 			$contentArea.trigger(event = $.Event('ajaxloadstart'), {url: url, hash: hash, method: method, data: data});
 			if (event.isDefaultPrevented()) return;
 			self.startLoading();//添加token,因为访问接口时才需要要token,页面的本项目的页面,所以不需要带加token的
-			//var _url = "?access_token="+(sessionStorage.getItem('access_token') || '')+"&refresh_token="+(sessionStorage.getItem('refresh_token') || '');
+			//var _url = "?accessToken="+(sessionStorage.getItem('accessToken') || '')+"&refreshToken="+(sessionStorage.getItem('refreshToken') || '');
 			//var ajax_params = method == 'GET' ? {'url': url+_url, 'cache': !this.force_reload} : {'url': url+_url, 'method' : 'POST', 'data': data};
             var ajax_params = method == 'GET' ? {'url': url, 'cache': !this.force_reload} : {'url': url, 'method' : 'POST', 'data': data};
             if(method == 'POST' && typeof extraParams == 'object') ajax_params = $.extend({}, ajax_params, extraParams);

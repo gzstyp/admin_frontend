@@ -138,7 +138,7 @@
             url : urlPrefix + url,
             //xhrFields : {withCredentials: true},
             //crossDomain : true,
-            headers : {'access_token': sessionStorage.getItem('access_token') || '',"refresh_token":sessionStorage.getItem("refresh_token") || ''},
+            headers : {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem("refreshToken") || ''},
             dataType : "json",
             data : params,
             beforeSend : function(request){

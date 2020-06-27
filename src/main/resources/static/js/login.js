@@ -46,8 +46,8 @@
                     layerFn.closeIndex(self.layerIndex);
                     if(data.code === 200){
                         var token = data.data;
-                        sessionStorage.setItem("access_token",token.access_token);
-                        sessionStorage.setItem("refresh_token",token.refresh_token);
+                        sessionStorage.setItem("accessToken",token.accessToken);
+                        sessionStorage.setItem("refreshToken",token.refreshToken);
                         sessionStorage.setItem("userName",token.userName);
                         var menuData = token.menuData;
                         if(menuData != null && menuData != ''){

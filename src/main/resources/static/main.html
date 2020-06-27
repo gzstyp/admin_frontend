@@ -173,9 +173,9 @@
 <script src="/js/dataTables/datatable.lib.js"></script>
 <script type="text/javascript">
     if(sessionStorage){
-        var access = sessionStorage.getItem('access_token');
+        var access = sessionStorage.getItem('accessToken');
         if(access != null && access != ''){
-            var refresh = sessionStorage.getItem('refresh_token');
+            var refresh = sessionStorage.getItem('refreshToken');
             if(refresh != null && refresh != ''){
                 $('#userName').text(sessionStorage.getItem('userName'));
                 var menuData = sessionStorage.getItem('menuData');
