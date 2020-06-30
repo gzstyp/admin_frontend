@@ -9637,7 +9637,8 @@ input.ace + .lbl.padding-0::before {
   top: 0;
   left: 0;
   right: 0;
-  height: 30px;
+  height: 34px;
+  line-height:34px;
   background-color: #ffffff;
   border: 1px solid #d5d5d5;
   cursor: pointer;
@@ -9659,7 +9660,8 @@ input.ace + .lbl.padding-0::before {
   right: 0;
   top: 0;
   bottom: 0;
-  line-height: 24px;
+  height: 32px;/*文件上传*/
+  line-height: 29px;/*文件上传*/
   text-align: center;
   padding: 0 8px;
   background-color: #6fb3e0;
@@ -9674,11 +9676,11 @@ input.ace + .lbl.padding-0::before {
 }
 .ace-file-input .ace-file-container .ace-file-name {
   display: inline-block;
-  height: 28px;
+  height: 32px;
+  line-height: 32px;
   max-width: 80%;
   white-space: nowrap;
   overflow: hidden;
-  line-height: 28px;
   color: #888888;
   font-size: 13px;
   vertical-align: top;
