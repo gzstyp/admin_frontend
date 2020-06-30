@@ -1800,6 +1800,40 @@ var refreshFlag = true;
                 }
             });
         },
+        /*表单提交,表单+文件异步提交,用法:
+        var formData = new FormData();
+        formData.append('KID',winFn.getDomValue(inputEditKeyId));
+        formData.append("PHOTO",document.getElementById("PHOTO").files[0]);//获取上传文件
+        layerFn.formSubmit(url,formData,function(data){});
+        */
+        formSubmit : function(url,formData,succeed,error){
+            $.ajax({
+                url : urlPrefix + url,
+                type : "POST",
+                data : formData,
+                contentType : false,
+                processData : false,
+                headers : {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem("refreshToken") || ''},
+                dataType : "json",
+                success : function(data){
+                    if(data.code == AppKey.code.code200){
+                        succeed(data);
+                    }else{
+                        layerFn.alert(data.msg,data.code);
+                    }
+                },
+                error : function (err){
+                    if(error){
+                        error(err);
+                    }else{
+                        layerFn.connectFailure();
+                    }
+                },
+                complete : function(response,status){
+                    ajaxComplete(response.responseJSON);
+                }
+            });
+        }
     };
     /**插件定义配置*/
     window.opts = {
@@ -2109,21 +2143,7 @@ var refreshFlag = true;
                 if(complete !=null && complete != undefined && complete != ''){
                     complete(response,status);
                 }
-                try{
-                    var json = response.responseJSON;
-                    if(json.code == AppKey.code.code205){
-                        layerFn.tokenLogin();return;
-                    }
-                    if(json.code == AppKey.code.code200){
-                        var renewal = json.renewal;
-                        if(renewal){
-                            if(refreshFlag){
-                                refreshFlag = false;
-                                renewalToken();
-                            }
-                        }
-                    }
-                }catch(e){}
+                ajaxComplete(response.responseJSON);
             }
         });
     }
@@ -2132,6 +2152,22 @@ var refreshFlag = true;
     }
     function status500(){
         layerFn.alert(AppKey.msg.msg204,AppKey.code.code204);
+    }
+    function ajaxComplete(json){
+        try{
+            if(json.code == AppKey.code.code205){
+                layerFn.tokenLogin();return;
+            }
+            if(json.code == AppKey.code.code200){
+                var renewal = json.renewal;
+                if(renewal){
+                    if(refreshFlag){
+                        refreshFlag = false;
+                        renewalToken();
+                    }
+                }
+            }
+        }catch(e){}
     }
     /*私有更新令牌方法*/
     function renewalToken(){
