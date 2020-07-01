@@ -1824,6 +1824,7 @@ var refreshFlag = true;
         layerFn.formSubmit(url,formData,function(data){});
         */
         formSubmit : function(url,formData,succeed,error){
+            var layerIndex = layerFn.loading('正在处理……');
             $.ajax({
                 url : urlPrefix + url,
                 type : "POST",
@@ -1833,6 +1834,7 @@ var refreshFlag = true;
                 headers : {'accessToken': sessionStorage.getItem('accessToken') || '',"refreshToken":sessionStorage.getItem("refreshToken") || ''},
                 dataType : "json",
                 success : function(data){
+                    layerFn.closeIndex(layerIndex);
                     if(data.code == AppKey.code.code200){
                         succeed(data);
                     }else{
@@ -1840,6 +1842,7 @@ var refreshFlag = true;
                     }
                 },
                 error : function (err){
+                    layerFn.closeIndex(layerIndex);
                     if(error){
                         error(err);
                     }else{
@@ -1847,6 +1850,7 @@ var refreshFlag = true;
                     }
                 },
                 complete : function(response,status){
+                    layerFn.closeIndex(layerIndex);
                     ajaxComplete(response.responseJSON);
                 }
             });
