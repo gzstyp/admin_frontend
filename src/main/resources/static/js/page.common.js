@@ -896,8 +896,12 @@ var refreshFlag = true;
             link.href = href;
             head[0].appendChild(link);
         },
+        /*winFn.getPageHashToken('/info.html?id=1024');*/
         getPageHashToken : function(url){
-            window.location.href = url + '?&accessToken=' + sessionStorage.getItem('accessToken') || '' + '&refreshToken=' + sessionStorage.getItem("refreshToken") || '';
+            var accessToken = sessionStorage.getItem('accessToken') || '';
+            var refreshToken = sessionStorage.getItem("refreshToken") || '';
+            url = url + '&accessToken='+accessToken+'&refreshToken='+refreshToken;
+            window.open(url,'_blank').location;/*打开新页面*/
         },
         getPageNormal : function(url){
             window.location.href = url;
