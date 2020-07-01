@@ -1966,7 +1966,7 @@ var refreshFlag = true;
     }
     //含带请求动画,方法beforeSend不为空,一般用于select查询方法
     function getQueryHint(url,params,success,msg){
-        msg = (msg == null || msg == '') ? "正在处理……" :msg;
+        msg = (msg == null || msg == '') ? "正在处理……" : msg;
         self.layerIndex = layerFn.loading(msg);
         ajaxRequestGet(url,params,function(request){},function(data){
             layerFn.closeIndex(self.layerIndex);
@@ -1985,7 +1985,7 @@ var refreshFlag = true;
     }
     //有带请求动画,方法beforeSend不为空,一般用于insert,update,delete方法
     function postRowHint(url,params,success,msg){
-        msg = (msg == null || msg == '') ? "正在处理……" :msg;
+        msg = (msg == null || msg == '') ? "正在处理……" : msg;
         self.layerIndex = layerFn.loading(msg);
         ajaxRequestPost(url,params,function(request){},function(data){
             layerFn.closeIndex(self.layerIndex);
